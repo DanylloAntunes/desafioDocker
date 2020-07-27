@@ -8,10 +8,10 @@ RUN go install -v ./...
 COPY . /var/www/
 WORKDIR /var/www/app
 
-RUN go build -a -installsuffix cgo -o main .
+RUN go build -ldflags="-s -w" -o main .
 
-FROM alpine:3.5
-WORKDIR /root/
+FROM scratch
+#WORKDIR /root/
 COPY --from=builder /var/www/app/main .
 
 CMD [ "./main" ]
