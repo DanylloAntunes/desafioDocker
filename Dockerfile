@@ -11,7 +11,6 @@ WORKDIR /var/www/app
 RUN go build -ldflags="-s -w" -o main .
 
 FROM scratch
-#WORKDIR /root/
 COPY --from=builder /var/www/app/main .
 
 CMD [ "./main" ]
